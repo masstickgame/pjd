@@ -913,7 +913,7 @@ const Information = () => {
 };
 async function get_userbyid(bodys) {
   // let token = localStorage.getItem("accessToken")
-  return await fetch('http://localhost:4025/system/get_userid', {
+  return await fetch('https://api-ii.onrender.com/system/get_userid', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -923,7 +923,7 @@ async function get_userbyid(bodys) {
     .then(data => data.json())
 }
 async function get_schoolAll() {
-  return await fetch('http://localhost:4025/system/get_schoolAll', {
+  return await fetch('https://api-ii.onrender.com/system/get_schoolAll', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -932,7 +932,7 @@ async function get_schoolAll() {
     .then(data => data.json())
 }
 async function updateuser(bodys) {
-  return await fetch('http://localhost:4025/system/update_user', {
+  return await fetch('https://api-ii.onrender.com/system/update_user', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -942,7 +942,7 @@ async function updateuser(bodys) {
     .then(data => data.json())
 }
 async function updateuserflag(bodys) {
-  return await fetch('http://localhost:4025/system/update_user_flag', {
+  return await fetch('https://api-ii.onrender.com/system/update_user_flag', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -952,7 +952,7 @@ async function updateuserflag(bodys) {
     .then(data => data.json())
 }
 async function get_coursebyid(bodys) {
-  return await fetch('http://localhost:4025/system/get_coursebyid', {
+  return await fetch('https://api-ii.onrender.com/system/get_coursebyid', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -962,7 +962,7 @@ async function get_coursebyid(bodys) {
     .then(data => data.json())
 }
 async function get_course_gradebyid(bodys) {
-  return await fetch('http://localhost:4025/system/get_course_gradebyid', {
+  return await fetch('https://api-ii.onrender.com/system/get_course_gradebyid', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -972,7 +972,7 @@ async function get_course_gradebyid(bodys) {
     .then(data => data.json())
 }
 async function add_course_grade2(bodys) {
-  return await fetch('http://localhost:4025/system/add_course_grade', {
+  return await fetch('https://api-ii.onrender.com/system/add_course_grade', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -983,7 +983,7 @@ async function add_course_grade2(bodys) {
 }
 
 async function get_universityAll() {
-  return await fetch('http://localhost:4025/system/get_universityAll', {
+  return await fetch('https://api-ii.onrender.com/system/get_universityAll', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -992,7 +992,7 @@ async function get_universityAll() {
     .then(data => data.json())
 }
 async function get_subjectbuid(bodys) {
-  return await fetch('http://localhost:4025/system/get_subjectbuid', {
+  return await fetch('https://api-ii.onrender.com/system/get_subjectbuid', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

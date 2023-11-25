@@ -535,7 +535,7 @@ function findDuplicates(arr) {
 }
 async function get_universityAll() {
   // let token = localStorage.getItem("accessToken")
-  return await fetch('http://localhost:4025/system/get_universityAll', {
+  return await fetch('https://api-ii.onrender.com/system/get_universityAll', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -544,7 +544,7 @@ async function get_universityAll() {
     .then(data => data.json())
 }
 async function SearchTermd(bodys) {
-  return await fetch('http://localhost:4025/system/search_university', {
+  return await fetch('https://api-ii.onrender.com/system/search_university', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -554,7 +554,7 @@ async function SearchTermd(bodys) {
     .then(data => data.json())
 }
 async function university_years(bodys) {
-  return await fetch('http://localhost:4025/system/search_university_year', {
+  return await fetch('https://api-ii.onrender.com/system/search_university_year', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -564,7 +564,7 @@ async function university_years(bodys) {
     .then(data => data.json())
 }
 async function add_university(bodys) {
-  return await fetch('http://localhost:4025/system/add_university', {
+  return await fetch('https://api-ii.onrender.com/system/add_university', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -574,7 +574,7 @@ async function add_university(bodys) {
     .then(data => data.json())
 }
 async function update_university(bodys) {
-  return await fetch('http://localhost:4025/system/update_university', {
+  return await fetch('https://api-ii.onrender.com/system/update_university', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -584,7 +584,7 @@ async function update_university(bodys) {
     .then(data => data.json())
 }
 async function del_university(bodys) {
-  return await fetch('http://localhost:4025/system/dalete_university', {
+  return await fetch('https://api-ii.onrender.com/system/dalete_university', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

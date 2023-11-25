@@ -279,7 +279,7 @@ const Maps = () => {
   );
 };
 async function get_schoolAll() {
-  return await fetch('http://localhost:4025/system/get_schoolAll', {
+  return await fetch('https://api-ii.onrender.com/system/get_schoolAll', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -288,7 +288,7 @@ async function get_schoolAll() {
     .then(data => data.json())
 }
 async function add_school(bodys) {
-  return await fetch('http://localhost:4025/system/add_school', {
+  return await fetch('https://api-ii.onrender.com/system/add_school', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -298,7 +298,7 @@ async function add_school(bodys) {
     .then(data => data.json())
 }
 async function update_school(bodys) {
-  return await fetch('http://localhost:4025/system/update_school', {
+  return await fetch('https://api-ii.onrender.com/system/update_school', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -308,7 +308,7 @@ async function update_school(bodys) {
     .then(data => data.json())
 }
 async function delete_school(bodys) {
-  return await fetch('http://localhost:4025/system/delete_school', {
+  return await fetch('https://api-ii.onrender.com/system/delete_school', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -318,7 +318,7 @@ async function delete_school(bodys) {
     .then(data => data.json())
 }
 async function SearchTermd(bodys) {
-  return await fetch('http://localhost:4025/system/search_school', {
+  return await fetch('https://api-ii.onrender.com/system/search_school', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -328,7 +328,7 @@ async function SearchTermd(bodys) {
     .then(data => data.json())
 }
 async function SearchDate(bodys) {
-  return await fetch('http://localhost:4025/system/search_date', {
+  return await fetch('https://api-ii.onrender.com/system/search_date', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

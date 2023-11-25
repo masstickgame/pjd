@@ -319,7 +319,7 @@ const Compare = () => {
 };
 async function get_userbyid(bodys) {
   // let token = localStorage.getItem("accessToken")
-  return await fetch('http://localhost:4025/system/get_userid', {
+  return await fetch('https://api-ii.onrender.com/system/get_userid', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -330,7 +330,7 @@ async function get_userbyid(bodys) {
 }
 async function approveuser(bodys) {
   // let token = localStorage.getItem("accessToken")
-  return await fetch('http://localhost:4025/system/update_user_approve', {
+  return await fetch('https://api-ii.onrender.com/system/update_user_approve', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -341,7 +341,7 @@ async function approveuser(bodys) {
 }
 async function get_userall_teacher() {
   // let token = localStorage.getItem("accessToken")
-  return await fetch('http://localhost:4025/system/get_userall_teacher', {
+  return await fetch('https://api-ii.onrender.com/system/get_userall_teacher', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

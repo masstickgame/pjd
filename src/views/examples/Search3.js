@@ -679,7 +679,7 @@ const Search3 = () => {
 };
 
 async function get_universityAll() {
-  return await fetch('http://localhost:4025/system/get_universityAll', {
+  return await fetch('https://api-ii.onrender.com/system/get_universityAll', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -688,7 +688,7 @@ async function get_universityAll() {
     .then(data => data.json())
 }
 async function get_subjectbuid(bodys) {
-  return await fetch('http://localhost:4025/system/get_subjectbuid', {
+  return await fetch('https://api-ii.onrender.com/system/get_subjectbuid', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -698,7 +698,7 @@ async function get_subjectbuid(bodys) {
     .then(data => data.json())
 }
 async function get_coursebyid(bodys) {
-  return await fetch('http://localhost:4025/system/get_coursebyid', {
+  return await fetch('https://api-ii.onrender.com/system/get_coursebyid', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -708,7 +708,7 @@ async function get_coursebyid(bodys) {
     .then(data => data.json())
 }
 async function add_course2(bodys) {
-  return await fetch('http://localhost:4025/system/add_course', {
+  return await fetch('https://api-ii.onrender.com/system/add_course', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -718,7 +718,7 @@ async function add_course2(bodys) {
     .then(data => data.json())
 }
 async function add_subject(bodys) {
-  return await fetch('http://localhost:4025/system/add_subject', {
+  return await fetch('https://api-ii.onrender.com/system/add_subject', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -728,7 +728,7 @@ async function add_subject(bodys) {
     .then(data => data.json())
 }
 async function delete_course(bodys) {
-  return await fetch('http://localhost:4025/system/delete_course', {
+  return await fetch('https://api-ii.onrender.com/system/delete_course', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

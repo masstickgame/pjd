@@ -657,7 +657,7 @@ const Rooms = () => {
 };
 async function get_userall_user() {
     // let token = localStorage.getItem("accessToken")
-    return await fetch('http://localhost:4025/system/get_userall_user', {
+    return await fetch('https://api-ii.onrender.com/system/get_userall_user', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -667,7 +667,7 @@ async function get_userall_user() {
 }
 async function get_userall_teacher() {
     // let token = localStorage.getItem("accessToken")
-    return await fetch('http://localhost:4025/system/get_userall_teacher', {
+    return await fetch('https://api-ii.onrender.com/system/get_userall_teacher', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -677,7 +677,7 @@ async function get_userall_teacher() {
 }
 async function get_userall_teacher_user_year(bodys) {
     // let token = localStorage.getItem("accessToken")
-    return await fetch('http://localhost:4025/system/get_userall_teacher_user_year', {
+    return await fetch('https://api-ii.onrender.com/system/get_userall_teacher_user_year', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -688,7 +688,7 @@ async function get_userall_teacher_user_year(bodys) {
 }
 async function get_userbyid(bodys) {
     // let token = localStorage.getItem("accessToken")
-    return await fetch('http://localhost:4025/system/get_userid', {
+    return await fetch('https://api-ii.onrender.com/system/get_userid', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -700,7 +700,7 @@ async function get_userbyid(bodys) {
 async function add_user(bodys) {
     // let token = localStorage.getItem("accessToken")
     // console.log(bodys)
-    return await fetch('http://localhost:4025/system/add_user', {
+    return await fetch('https://api-ii.onrender.com/system/add_user', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -712,7 +712,7 @@ async function add_user(bodys) {
 async function updateuser(bodys) {
     // let token = localStorage.getItem("accessToken")
     // console.log(bodys)
-    return await fetch('http://localhost:4025/system/update_user', {
+    return await fetch('https://api-ii.onrender.com/system/update_user', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -724,7 +724,7 @@ async function updateuser(bodys) {
 async function deleteuser(bodys) {
     // let token = localStorage.getItem("accessToken")
     // console.log(bodys)
-    return await fetch('http://localhost:4025/system/dalete_user', {
+    return await fetch('https://api-ii.onrender.com/system/dalete_user', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -734,7 +734,7 @@ async function deleteuser(bodys) {
         .then(data => data.json())
 }
 async function get_course_grade(bodys) {
-    return await fetch('http://localhost:4025/system/get_course_grade', {
+    return await fetch('https://api-ii.onrender.com/system/get_course_grade', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

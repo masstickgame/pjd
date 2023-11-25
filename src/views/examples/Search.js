@@ -262,7 +262,7 @@ const Search = () => {
   );
 };
 async function get_user_flag(bodys) {
-  return await fetch('http://localhost:4025/system/get_user_flag', {
+  return await fetch('https://api-ii.onrender.com/system/get_user_flag', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -272,7 +272,7 @@ async function get_user_flag(bodys) {
     .then(data => data.json())
 }
 async function get_schoolAll() {
-  return await fetch('http://localhost:4025/system/get_schoolAll', {
+  return await fetch('https://api-ii.onrender.com/system/get_schoolAll', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -281,7 +281,7 @@ async function get_schoolAll() {
     .then(data => data.json())
 }
 async function get_course_grade(bodys) {
-  return await fetch('http://localhost:4025/system/get_course_grade', {
+  return await fetch('https://api-ii.onrender.com/system/get_course_grade', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
