@@ -35,6 +35,10 @@ const Search3 = () => {
   let indexset
   // function นี้ เปิดมาแล้วทำงานทันที (use effect)
   useEffect(() => {
+    let token = localStorage.getItem('accessToken') || null
+    if(token == null){
+      window.location.href = '/auth/login'
+    }
     let ns = localStorage.getItem("names")
     let id_sub = localStorage.getItem("id_school")
     setNames(ns)

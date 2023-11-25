@@ -43,6 +43,10 @@ const Rooms = () => {
     const [teacher, setTeacher] = useState([]);
     const [teacher_name, setTeacherName] = useState([]);
     useEffect(() => {
+        let token = localStorage.getItem('accessToken') || null
+    if(token == null){
+      window.location.href = '/auth/login'
+    }
         getuserData()
         getuserDataTeacher()
     }, []);

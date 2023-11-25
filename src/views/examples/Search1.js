@@ -72,6 +72,10 @@ const Search1 = () => {
 
   
   useEffect(() => {
+    let token = localStorage.getItem('accessToken') || null
+    if(token == null){
+      window.location.href = '/auth/login'
+    }
     let Items = sessionStorage.getItem('itemSchool2')
     setNames(sessionStorage.getItem('nameS'))
     let json = JSON.parse(Items)

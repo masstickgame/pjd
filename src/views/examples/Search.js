@@ -12,6 +12,10 @@ const Search = () => {
   const [itemsschoo, setItemsschoo] = useState([]);
   const [user_year, setUser_year] = useState('2020');
   useEffect(() => {
+    let token = localStorage.getItem('accessToken') || null
+    if(token == null){
+      window.location.href = '/auth/login'
+    }
     get_school()
   }, []);
   const get_userflag = async () => {

@@ -155,6 +155,10 @@ const Information = () => {
   const [flagboo, setFlagboo] = useState(false);
   const [university_year, setUniversity_year] = useState('');
   useEffect(() => {
+    let token = localStorage.getItem('accessToken') || null
+    if(token == null){
+      window.location.href = '/auth/login'
+    }
     getuserData()
     handleSelectChange()
   }, []);

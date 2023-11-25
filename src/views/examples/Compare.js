@@ -45,6 +45,11 @@ const Compare = () => {
   const [user_lastname_th, setLastnameth] = useState();
 
   useEffect(() => {
+    let token = localStorage.getItem('accessToken') || null
+    if(token == null){
+      window.location.href = '/auth/login'
+    }
+
     let Items = sessionStorage.getItem('itemSchool2')
     setNames(sessionStorage.getItem('nameS'))
     let json = JSON.parse(Items)

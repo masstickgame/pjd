@@ -20,6 +20,10 @@ const Maps = () => {
   const years = Array.from({ length: 20 }, (_, index) => currentYear - 5 + index);
 
   useEffect(() => {
+    let token = localStorage.getItem('accessToken') || null
+    if(token == null){
+      window.location.href = '/auth/login'
+    }
     get_school()
   }, []);
   const get_school = async () => {

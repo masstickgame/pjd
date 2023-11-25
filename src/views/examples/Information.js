@@ -55,6 +55,10 @@ const Information = () => {
   const [des, setDes] = useState([]);
   const [itemsubject, setItemsSubject] = useState([]);
   useEffect(() => {
+    let token = localStorage.getItem('accessToken') || null
+    if(token == null){
+      window.location.href = '/auth/login'
+    }
     getuserbyidData()
     get_school()
     get_university()
