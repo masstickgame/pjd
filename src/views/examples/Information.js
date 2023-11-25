@@ -376,6 +376,9 @@ const Information = () => {
       if (ids === itemsubject[i].id_subject) {
         setDes(itemsubject[i].explanation)
       }
+      else {
+        setDes(null)
+      }
     }
     toggledes()
   };
