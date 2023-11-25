@@ -38,6 +38,7 @@ const AdminNavbar = (props) => {
   let names  = localStorage.getItem('name')
   const logout = () => {
     localStorage.clear()
+    sessionStorage.clear()
     window.location.replace('/auth/login');
   };
   return (
