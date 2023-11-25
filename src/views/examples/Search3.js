@@ -37,7 +37,7 @@ const Search3 = () => {
   useEffect(() => {
     let token = localStorage.getItem('accessToken') || null
     if(token == null){
-      window.location.href = '/auth/login'
+      window.location.href = '/auth'
     }
     let ns = localStorage.getItem("names")
     let id_sub = localStorage.getItem("id_school")

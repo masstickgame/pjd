@@ -22,7 +22,7 @@ const Maps = () => {
   useEffect(() => {
     let token = localStorage.getItem('accessToken') || null
     if(token == null){
-      window.location.href = '/auth/login'
+      window.location.href = '/auth'
     }
     get_school()
   }, []);

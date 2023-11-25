@@ -157,7 +157,7 @@ const Information = () => {
   useEffect(() => {
     let token = localStorage.getItem('accessToken') || null
     if(token == null){
-      window.location.href = '/auth/login'
+      window.location.href = '/auth'
     }
     getuserData()
     handleSelectChange()
