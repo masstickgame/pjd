@@ -22,7 +22,6 @@
   "bugs": {
     "url": "https://github.com/creativetimofficial/argon-dashboard-react/issues"
   },
-
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -47,6 +46,7 @@
     "bootstrap": "4.6.0",
     "chart.js": "2.9.4",
     "classnames": "2.3.1",
+    "date-fns": "^2.30.0",
     "moment": "2.29.4",
     "nouislider": "15.2.0",
     "react": "^17.0.2",

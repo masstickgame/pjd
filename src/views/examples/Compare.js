@@ -45,11 +45,6 @@ const Compare = () => {
   const [user_lastname_th, setLastnameth] = useState();
 
   useEffect(() => {
-    let token = localStorage.getItem('accessToken') || null
-    if(token == null){
-      window.location.href = '/auth'
-    }
-
     let Items = sessionStorage.getItem('itemSchool2')
     setNames(sessionStorage.getItem('nameS'))
     let json = JSON.parse(Items)
@@ -59,13 +54,29 @@ const Compare = () => {
       json[j].result_tc = i.groupuniversitys[0].result_tc
       sums += parseInt(i.unit_university)
     });
+  
+    const thaiMonths = [
+      'มกราคม',
+      'กุมภาพันธ์',
+      'มีนาคม',
+      'เมษายน',
+      'พฤษภาคม',
+      'มิถุนายน',
+      'กรกฎาคม',
+      'สิงหาคม',
+      'กันยายน',
+      'ตุลาคม',
+      'พฤศจิกายน',
+      'ธันวาคม'
+    ];
+    
     const currentDate = new Date();
-    const options = {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    };
-    const dateString = currentDate.toLocaleDateString(undefined, options);
+    const currentMonth = currentDate.getMonth();
+    const currentDay = currentDate.getDate();
+    const currentYaer = currentDate.getFullYear() +543;
+    const thaiMonthName = thaiMonths[currentMonth];
+    
+    let dateString = currentDay +' '+ thaiMonthName +' '+currentYaer
     setDates(dateString)
     setSum(sums)
     let arr = []
@@ -210,7 +221,7 @@ const Compare = () => {
                 </Col>
                 <Col lg="6" style={{ "text-align": "left" }}>
                   <h5>
-                    1.	ชื่อ - นามสกุล(นักศึกษา) : {user_firstname_th} {user_lastname_th}
+                    1.	ชื่อ - นามสกุล(นักศึกษา) : {user_firstname} {user_lastname}
                   </h5>
                 </Col>
                 <Col lg="6" >
@@ -225,7 +236,7 @@ const Compare = () => {
                 </Col>
                 <Col lg="6" >
                   <h5>
-                    จำนวนหน่วยกิต ตลอดหลักสูตร 135 หน่วยกิต
+                    จำนวนหน่วยกิต ตลอดหลักสูตร 130 หน่วยกิต
                   </h5>
                 </Col>
                 <Col lg="12" style={{ "text-align": "left" }}>
@@ -290,7 +301,7 @@ const Compare = () => {
               <Row style={{ "padding": "20px" }}>
                 <Col lg="12" style={{ "text-align": "left" }}>
                   <h4>
-                    4.	จำนวนหน่วยกิตที่ต้องศึกษาอีกจำนวน .......... {135-sum} .......... หน่วยกิต
+                    4.	จำนวนหน่วยกิตที่ต้องศึกษาอีกจำนวน .......... {130-sum} .......... หน่วยกิต
                   </h4>
                 </Col>
                 <Col lg="12" style={{ "text-align": "left" }}>

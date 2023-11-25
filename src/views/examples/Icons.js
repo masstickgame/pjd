@@ -537,7 +537,7 @@ const Icons = () => {
                 </FormGroup>
               </Col>
               }
-              {user_type == 'user' && <Col lg="6">
+              {/* {user_type == 'user' && <Col lg="6">
                 <FormGroup>
                   <Label for="id_card">
                     เลขบัตรประชาชน
@@ -552,7 +552,7 @@ const Icons = () => {
                   />
                 </FormGroup>
               </Col>
-              }
+              } */}
               {user_type != "undefined" &&
                 <Col lg="6">
                   <FormGroup>
