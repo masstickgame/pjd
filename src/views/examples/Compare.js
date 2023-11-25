@@ -210,7 +210,7 @@ const Compare = () => {
                 </Col>
                 <Col lg="6" style={{ "text-align": "left" }}>
                   <h5>
-                    1.	ชื่อ - นามสกุล(นักศึกษา) : {user_firstname} {user_lastname}
+                    1.	ชื่อ - นามสกุล(นักศึกษา) : {user_firstname_th} {user_lastname_th}
                   </h5>
                 </Col>
                 <Col lg="6" >
@@ -225,7 +225,7 @@ const Compare = () => {
                 </Col>
                 <Col lg="6" >
                   <h5>
-                    จำนวนหน่วยกิต ตลอดหลักสูตร 130 หน่วยกิต
+                    จำนวนหน่วยกิต ตลอดหลักสูตร 135 หน่วยกิต
                   </h5>
                 </Col>
                 <Col lg="12" style={{ "text-align": "left" }}>
