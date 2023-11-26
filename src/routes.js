@@ -118,7 +118,7 @@ var routes = [
   },
   {
     path: "/rooms",
-    name: "Rooms",
+    name: "ปีการศึกษา",
     icon: "ni ni-bullet-list-67 text-red",
     component: Rooms,
     layout: "/admin",

@@ -60,11 +60,14 @@ const Rooms = () => {
         setTeacher(users)
     };
     const getuserDataYear = async () => {
-        let users = await get_userall_teacher_user_year({
-            user_year: user_year
-        })
-
-        setItems(users)
+        if (user_year != null && user_year != '') {
+            let users = await get_userall_teacher_user_year({
+                user_year: user_year
+            })
+            setItems(users)
+        } else{
+            setItems([])
+        }
     };
     const getuserbyidData = async (ids) => {
         const response = await get_userbyid({
