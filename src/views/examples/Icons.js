@@ -547,7 +547,7 @@ const Icons = () => {
                     name="id_card"
                     placeholder="Enter id card"
                     type="text"
-                    value={id_card}
+                    value={id_card} 
                     onChange={e => setIdCarde(e.target.value)}
                   />
                 </FormGroup>

@@ -249,6 +249,9 @@ const Rooms = () => {
                                 type="select"
                                 value={user_year} onChange={handleSelectChangeYear}
                             >
+                                <option value={''}>
+                                    กรุณาเลือกปีการศึกษา
+                                </option>
                                 <option value={'2563'}>
                                     2563
                                 </option>

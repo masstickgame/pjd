@@ -775,7 +775,6 @@ const Information = () => {
                             valign="bottom"
                           >
                             {user_flag_Ther == 0 || user_flag_Ther == null && <Input type="select" value={university.grade} onChange={(event) => handleSelectCh(event, idx, subIndex)}>
-                              <option value=""></option>
                               <option value="0">0</option>
                               <option value="1">1</option>
                               <option value="1.5">1.5</option>
@@ -787,7 +786,6 @@ const Information = () => {
 
                             </Input>}
                             {user_flag_Ther == 1 && <Input type="select" disabled value={university.grade} onChange={(event) => handleSelectCh(event, idx, subIndex)}>
-                              <option value=""></option>
                               <option value="0">0</option>
                               <option value="1">1</option>
                               <option value="1.5">1.5</option>
@@ -866,7 +864,7 @@ const Information = () => {
                     <Input
                       id="unit_subject"
                       name="unit_subject"
-                      placeholder="กรอกหน่วยกิจ"
+                      placeholder="กรอกหน่วยกิต"
                       type="text"
                       value={unit_subject}
                       onChange={e => setUnit_subject(e.target.value)}

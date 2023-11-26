@@ -52,7 +52,9 @@ const Compare = () => {
 
     json.forEach((i, j) => {
       json[j].result_tc = i.groupuniversitys[0].result_tc
-      sums += parseInt(i.unit_university)
+      if( json[j].result_tc !='nct'){
+        sums += parseInt(i.unit_university)
+      }
     });
   
     const thaiMonths = [

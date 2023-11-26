@@ -164,17 +164,25 @@ const Search1 = () => {
     window.location.href = '/admin/rooms'
   }
   const nextpage = async () => {
-    for (let index = 0; index < itemSchool2.length; index++) {
-      itemSchool2[index].teacher1 = teacher1
-      itemSchool2[index].teacher2 = teacher2
-      itemSchool2[index].teacher3 = teacher3
-      
+    if(teacher1 == null && teacher2 == null && teacher3 == null&&user_type === 'teacher' ){
+      Swal.fire({
+        title: "The Internet?",
+        text: "กรุณาเลือกอาจารย์ให้ครบ 3 ท่าน",
+        icon: "error"
+      });
+    }else{
+      for (let index = 0; index < itemSchool2.length; index++) {
+        itemSchool2[index].teacher1 = teacher1
+        itemSchool2[index].teacher2 = teacher2
+        itemSchool2[index].teacher3 = teacher3
+        
+      }
+      const response = await update_course_grade2(itemSchool2);
+      const response2 = await add_teacher(itemSchool2);
+      // console.log(itemSchool2)
+      sessionStorage.setItem('itemSchool2', JSON.stringify(itemSchool2))
+      window.location.href = '/admin/compare'
     }
-    const response = await update_course_grade2(itemSchool2);
-    const response2 = await add_teacher(itemSchool2);
-    // console.log(itemSchool2)
-    sessionStorage.setItem('itemSchool2', JSON.stringify(itemSchool2))
-    window.location.href = '/admin/compare'
   }
   const handleSelectCh = (event, index, subIndex, id_course) => {
     setSelected(event.target.value);
@@ -427,21 +435,21 @@ const Search1 = () => {
                               >
 
                                 {user_type == 'admin' && <Input type="select" disabled value={university.result_tc} onChange={(event) => handleSelectCh(event, idx, subIndex, university.id_course)}>
-                                  <option value=""></option>
+
                                   <option value="tc">TC</option>
                                   <option value="ce">CE</option>
                                   <option value="cs">CS</option>
                                   <option value="nct">ไม่อนุมัติ</option>
                                 </Input>}
                                 {user_type == 'user' && <Input type="select" disabled value={university.result_tc} onChange={(event) => handleSelectCh(event, idx, subIndex, university.id_course)}>
-                                  <option value=""></option>
+
                                   <option value="tc">TC</option>
                                   <option value="ce">CE</option>
                                   <option value="cs">CS</option>
                                   <option value="nct">ไม่อนุมัติ</option>
                                 </Input>}
                                 {user_type == 'teacher' && <Input type="select" value={university.result_tc} onChange={(event) => handleSelectCh(event, idx, subIndex, university.id_course)}>
-                                  <option value=""></option>
+
                                   <option value="tc">TC</option>
                                   <option value="ce">CE</option>
                                   <option value="cs">CS</option>
