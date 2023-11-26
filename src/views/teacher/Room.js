@@ -67,6 +67,7 @@ const Rooms = () => {
             setItems(users)
         } else{
             setItems([])
+            console.log()
         }
     };
     const getuserbyidData = async (ids) => {
