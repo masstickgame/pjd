@@ -12,10 +12,6 @@ const Search = () => {
   const [itemsschoo, setItemsschoo] = useState([]);
   const [user_year, setUser_year] = useState('2020');
   useEffect(() => {
-    let token = localStorage.getItem('accessToken') || null
-    if(token == null){
-      window.location.href = '/auth'
-    }
     get_school()
   }, []);
   const get_userflag = async () => {
@@ -80,9 +76,7 @@ const Search = () => {
           id_course: separatedData[Dataname[i].id_universitys][j].id_course,
           grade: separatedData[Dataname[i].id_universitys][j].grade,
           result_tc: separatedData[Dataname[i].id_universitys][j].result_tc,
-          teacher1s : separatedData[Dataname[i].id_universitys][j].teacher1,
-          teacher2s : separatedData[Dataname[i].id_universitys][j].teacher2,
-          teacher3s : separatedData[Dataname[i].id_universitys][j].teacher3,
+          indextea: separatedData[Dataname[i].id_universitys][j].indextea
         }
         console.log(groupsub)
         if(groupsub.teacher1s != '[]'){
@@ -152,6 +146,9 @@ const Search = () => {
                 type="select"
                 value={user_year} onChange={handleSelectChange}
               >
+                 <option value={''}>
+                  เลือกปี
+                </option>
                 <option value={'2563'}>
                   2563
                 </option>

@@ -55,10 +55,6 @@ const Information = () => {
   const [des, setDes] = useState([]);
   const [itemsubject, setItemsSubject] = useState([]);
   useEffect(() => {
-    let token = localStorage.getItem('accessToken') || null
-    if(token == null){
-      window.location.href = '/auth'
-    }
     getuserbyidData()
     get_school()
     get_university()
@@ -200,6 +196,7 @@ const Information = () => {
           sub_name: separatedData[Dataname[i].id_universitys][j].name_subject,
           unit_subject: separatedData[Dataname[i].id_universitys][j].unit_subject,
           index_sub: separatedData[Dataname[i].id_universitys][j].index_sub,
+          indextea: separatedData[Dataname[i].id_universitys][j].indexteam,
           id_course: null,
 
         }
@@ -257,6 +254,7 @@ const Information = () => {
             teacher1s: separatedData[Dataname[i].id_universitys][j].teacher1,
             teacher2s: separatedData[Dataname[i].id_universitys][j].teacher2,
             teacher3s: separatedData[Dataname[i].id_universitys][j].teacher3,
+            indextea: separatedData[Dataname[i].id_universitys][j].indextea
           }
           if (groupsub.teacher1s != '[]') {
             teacher1s = groupsub.teacher1s
@@ -375,9 +373,6 @@ const Information = () => {
     for (let i = 0; i < itemsubject.length; i++) {
       if (ids === itemsubject[i].id_subject) {
         setDes(itemsubject[i].explanation)
-      }
-      else {
-        setDes(null)
       }
     }
     toggledes()
@@ -775,6 +770,7 @@ const Information = () => {
                             valign="bottom"
                           >
                             {user_flag_Ther == 0 || user_flag_Ther == null && <Input type="select" value={university.grade} onChange={(event) => handleSelectCh(event, idx, subIndex)}>
+                              <option value=""></option>
                               <option value="0">0</option>
                               <option value="1">1</option>
                               <option value="1.5">1.5</option>
@@ -786,6 +782,7 @@ const Information = () => {
 
                             </Input>}
                             {user_flag_Ther == 1 && <Input type="select" disabled value={university.grade} onChange={(event) => handleSelectCh(event, idx, subIndex)}>
+                              <option value=""></option>
                               <option value="0">0</option>
                               <option value="1">1</option>
                               <option value="1.5">1.5</option>
@@ -864,7 +861,7 @@ const Information = () => {
                     <Input
                       id="unit_subject"
                       name="unit_subject"
-                      placeholder="กรอกหน่วยกิต"
+                      placeholder="กรอกหน่วยกิจ"
                       type="text"
                       value={unit_subject}
                       onChange={e => setUnit_subject(e.target.value)}

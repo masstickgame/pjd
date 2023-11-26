@@ -33,6 +33,8 @@ const Rooms = () => {
     const [user_type, setUserType] = useState("undefined");
     const [user_firstname, setUserFirstname] = useState();
     const [user_lastname, setUserLastname] = useState();
+    const [user_firstname_th, setUserFirstnameTH] = useState();
+    const [user_lastname_th, setUserLastnameTH] = useState();
     const [user_year, setuseYear] = useState('2020');
     const [user_unit, setUserUnit] = useState();
     const [id_card, setIdCarde] = useState();
@@ -43,15 +45,12 @@ const Rooms = () => {
     const [teacher, setTeacher] = useState([]);
     const [teacher_name, setTeacherName] = useState([]);
     useEffect(() => {
-        let token = localStorage.getItem('accessToken') || null
-    if(token == null){
-      window.location.href = '/auth'
-    }
-        getuserData()
+        // getuserData()
         getuserDataTeacher()
     }, []);
 
     const getuserData = async () => {
+
         let users = await get_userall_user()
         setItems(users)
     };
@@ -67,7 +66,6 @@ const Rooms = () => {
             setItems(users)
         } else{
             setItems([])
-            console.log()
         }
     };
     const getuserbyidData = async (ids) => {
@@ -113,6 +111,8 @@ const Rooms = () => {
         if (user_type === 'teacher') {
             student_id = tel
         }
+        console.log(teacher_id)
+        console.log(teacher_name)
         const response = await updateuser({
             id: id,
             user_name: nameStr,
@@ -125,8 +125,8 @@ const Rooms = () => {
             id_card,
             tel,
             student_id,
-            teacher_id,
-            teacher_name
+            teacher_id : teacher_id,
+            teacher_name : teacher_name
         });
         toggleEdit()
         getuserData()
@@ -150,13 +150,13 @@ const Rooms = () => {
     };
     const handleteacherChange = (event) => {
         setTeacher_id(event.target.value); // เมื่อมีการเปลี่ยนแปลงค่าใน <select> ให้อัปเดตค่า selectedValue
+        console.log(teacher)
         teacher.forEach(i => {
+        
             if (i.id === parseInt(event.target.value)) {
-                setTeacherName(i.user_firstname + ' ' + i.user_lastname)
-            } else {
-                setTeacher_id(null)
-                setTeacherName(null)
-            }
+                setTeacherName(i.user_firstname_th + ' ' + i.user_lastname_th)
+                setTeacher_id(parseInt(event.target.value))
+            } 
         });
     };
     const gotoSearch1 = async (id) => {
@@ -194,7 +194,8 @@ const Rooms = () => {
                     index_sub: separatedData[Dataname[i].id_universitys][j].index_sub,
                     id_course: separatedData[Dataname[i].id_universitys][j].id_course,
                     grade: separatedData[Dataname[i].id_universitys][j].grade,
-                    result_tc: separatedData[Dataname[i].id_universitys][j].result_tc
+                    result_tc: separatedData[Dataname[i].id_universitys][j].result_tc,
+                    indextea: separatedData[Dataname[i].id_universitys][j].indextea
                 }
                 groupuniversity.push(groupsub)
             }
@@ -226,11 +227,12 @@ const Rooms = () => {
                 sessionStorage.setItem('nameS', items[i].names)
             }
         }
+        sessionStorage.removeItem('teacherCols')
         sessionStorage.setItem('itemSchool2', JSON.stringify(json))
         sessionStorage.setItem('datauser', JSON.stringify(datauser))
 
         // console.log(Dataname2)
-        window.location.href = '/admin/Search1'
+        window.location.href = '/admin/Search1/'
     };
     return (
         <>
@@ -254,7 +256,7 @@ const Rooms = () => {
                                 value={user_year} onChange={handleSelectChangeYear}
                             >
                                 <option value={''}>
-                                    กรุณาเลือกปีการศึกษา
+                                    กรุณาเลือกปีที่ต้องการ
                                 </option>
                                 <option value={'2563'}>
                                     2563
@@ -588,7 +590,7 @@ const Rooms = () => {
                                 </FormGroup>
                             </Col>
 
-                            <Col lg="6">
+                            {/* <Col lg="6">
                                 <FormGroup>
                                     <Label for="id_card">
                                         บัตรประชาชน
@@ -602,7 +604,7 @@ const Rooms = () => {
                                         disabled onChange={e => setIdCarde(e.target.value)}
                                     />
                                 </FormGroup>
-                            </Col>
+                            </Col> */}
 
                             <Col lg="6">
                                 <FormGroup>
@@ -620,7 +622,7 @@ const Rooms = () => {
                                 </FormGroup>
                             </Col>
 
-                            <Col lg="12">
+                            <Col lg="6">
                                 <FormGroup>
                                     <Label for="student_id">
                                         เลขประจำนักเรียน
@@ -643,7 +645,7 @@ const Rooms = () => {
                                     <Input type="select" value={teacher_id} onChange={handleteacherChange} >
                                         <option value="">Select an option</option>
                                         {teacher.map(teach => (
-                                            <option key={teach.id} value={teach.id}>{teach.user_firstname} {teach.user_lastname}</option>
+                                            <option key={teach.id} value={teach.id}>{teach.user_firstname_th} {teach.user_lastname_th}</option>
                                         ))}
                                     </Input>
                                 </FormGroup>
@@ -746,12 +748,12 @@ async function deleteuser(bodys) {
 }
 async function get_course_grade(bodys) {
     return await fetch('https://api-ii.onrender.com/system/get_course_grade', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(bodys)
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(bodys)
     })
-      .then(data => data.json())
-  }
+        .then(data => data.json())
+}
 export default Rooms;

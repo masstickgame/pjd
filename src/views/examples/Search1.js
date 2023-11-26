@@ -67,28 +67,25 @@ const Search1 = () => {
   const [selectedOption2, setSelectedOption2] = useState([]);
   const [selectedOption3, setSelectedOption3] = useState([]);
   const [itemteacher, setitemteacher] = useState([]);
-  
+  const [flagselectedOption, setFlagselectedOption] = useState(true);
 
 
-  
+
+
   useEffect(() => {
-    let token = localStorage.getItem('accessToken') || null
-    if(token == null){
-      window.location.href = '/auth'
-    }
     let Items = sessionStorage.getItem('itemSchool2')
     setNames(sessionStorage.getItem('nameS'))
     let json = JSON.parse(Items)
-    if(json.length != 0){
-      setSelectedOption1(json[0].teacher1||null)
-      setTaecher1(json[0].teacher1);
-      setSelectedOption2(json[0].teacher2||null)
-      setTaecher2(json[0].teacher2);
-      setSelectedOption3(json[0].teacher3||null)
-      setTaecher3(json[0].teacher3);
+    if (json.length != 0) {
+      if(json[0].groupuniversitys[0].indextea != null){
+        setTeacherCols(json[0].groupuniversitys[0].indextea);
+      }
       setItemsSchool2(json)
+      if (selectedOption1 != null && selectedOption2 != null && selectedOption3 != null) {
+        setFlagselectedOption(false)
+      }
     }
-   
+
     getuserbyidData()
     getuserDataTeacher()
   }, []);
@@ -108,7 +105,7 @@ const Search1 = () => {
       response[0] = jsons2
 
     }
-    
+
     setId(ids)
     setUserFirstnameTH(response[0].user_firstname_th)
     setUserLastnameTH(response[0].user_lastname_th)
@@ -124,32 +121,44 @@ const Search1 = () => {
     setSelectedOption(response[0].university_old)
     setUser_flag_ther(response[0].user_flag_ther)
   };
-//---
-  const handleSelectChange1 = (event) => {
+  //---
+  const handleSelectChange1 = async (event) => {
     console.log(event.target.value);
     for (let i = 0; i < itemteacher.length; i++) {
       itemteacher[i].teacher1 = teacher1;
-    }   
-    setSelectedOption1(event.target.value)
-    setTaecher1(event.target.value);
+    }
+    await setSelectedOption1(event.target.value)
+    await setTaecher1(event.target.value);
+    if (teacher1 != null && teacher2 != null && teacher3 != null) {
+      setFlagselectedOption(false)
+    }
   };
-  const handleSelectChange2 = (event) => {
+  const handleSelectChange2 = async (event) => {
     console.log(event.target.value);
     for (let i = 0; i < itemteacher.length; i++) {
       itemteacher[i].teacher2 = teacher2;
     }
-    setSelectedOption2(event.target.value)
-    setTaecher2(event.target.value);
+    await setSelectedOption2(event.target.value)
+    await setTaecher2(event.target.value);
+    if (teacher1 != null && teacher2 != null && teacher3 != null) {
+      setFlagselectedOption(false)
+    }
   };
-  const handleSelectChange3 = (event) => {
+  const handleSelectChange3 = async (event) => {
     console.log(event.target.value);
     for (let i = 0; i < itemteacher.length; i++) {
       itemteacher[i].teacher3 = teacher3;
-    }  
-    setSelectedOption3(event.target.value)
-    setTaecher3(event.target.value);
+    }
+    await setSelectedOption3(event.target.value)
+    await setTaecher3(event.target.value);
+    checkteacher()
   };
-//---
+  const checkteacher = async () => {
+    if (teacher1 != null && teacher2 != null && teacher3 != null) {
+      setFlagselectedOption(false)
+    }
+  }
+  //---
   const getuserDataTeacher = async () => {
     let users = await get_userall_teacher()
     setTeacher(users)
@@ -164,35 +173,92 @@ const Search1 = () => {
     window.location.href = '/admin/rooms'
   }
   const nextpage = async () => {
-    if(teacher1 == null && teacher2 == null && teacher3 == null&&user_type === 'teacher' ){
+    if (user_type === 'admin'){
+      window.location.href = '/admin/compare'
+  }
+    if (teacherCols.length === 0) {
       Swal.fire({
-        title: "The Internet?",
-        text: "กรุณาเลือกอาจารย์ให้ครบ 3 ท่าน",
+        title: "แจ้งเตือน!",
+        text: "ไม่มีข้อมูลอาจารย์",
         icon: "error"
       });
-    }else{
-      for (let index = 0; index < itemSchool2.length; index++) {
-        itemSchool2[index].teacher1 = teacher1
-        itemSchool2[index].teacher2 = teacher2
-        itemSchool2[index].teacher3 = teacher3
-        
-      }
-      const response = await update_course_grade2(itemSchool2);
-      const response2 = await add_teacher(itemSchool2);
-      // console.log(itemSchool2)
-      sessionStorage.setItem('itemSchool2', JSON.stringify(itemSchool2))
-      window.location.href = '/admin/compare'
+      return; // ออกจากฟังก์ชันถ้าไม่มีข้อมูล
     }
+
+    for (let index = 0; index < teacherCols.length; index++) {
+      // เช็คว่าในแต่ละ teacherCol มีข้อมูลหรือไม่
+      if (!teacherCols[index].selectedOption) {
+        Swal.fire({
+          title: "แจ้งเตือน!",
+          text: `กรุณาเลือกครูใน ${teacherCols[index].label}`,
+          icon: "error"
+        });
+        return; // ออกจากฟังก์ชันถ้าไม่มีข้อมูล
+      }
+      
+
+    }
+    for (let index = 0; index < itemSchool2.length; index++) {
+      itemSchool2[index].teacher =''
+      itemSchool2[index].teacher = JSON.stringify(teacherCols)
+      for(let ith = 0; ith < itemSchool2[index].groupuniversitys.length; ith++){
+        itemSchool2[index].groupuniversitys[ith].teacher =  JSON.stringify(teacherCols)
+        itemSchool2[index].groupuniversitys[ith].indextea =  teacherCols
+      }
+    }
+    
+    // ตรวจสอบความถูกต้องและดำเนินการต่อ
+    const response = await update_course_grade2(itemSchool2);
+    const response2 = await add_teacher(itemSchool2);
+
+    // คุณอาจต้องเปลี่ยน itemSchool2 เป็น teacherCols ที่ใช้ในโค้ดของคุณ
+
+    sessionStorage.setItem('teacherCols', JSON.stringify(teacherCols))
+    sessionStorage.setItem('itemSchool2', JSON.stringify(itemSchool2))
+    window.location.href = '/admin/compare'
   }
-  const handleSelectCh = (event, index, subIndex, id_course) => {
+
+  const handleSelectCh = (event, index, subIndex,teacher, id_course) => {
     setSelected(event.target.value);
-    console.log(event.target.value, index, id_course)
     itemSchool2[index].result_tc = event.target.value
     itemSchool2[index].groupuniversity[subIndex].result_tc = event.target.value
     itemSchool2[index].groupuniversitys[subIndex].result_tc = event.target.value
-
+    
     console.log(itemSchool2)
+  }
+
+  const [teacherCols, setTeacherCols] = useState([
+    {
+      id: 1,
+      label: 'อาจารย์ท่านที่ 1',
+      selectedOption: '',
+    },
+  ]);
+
+  const handleSelectChange = (colIndex, value) => {
+    const newTeacherCols = [...teacherCols];
+    newTeacherCols[colIndex].selectedOption = value;
+    console.log(newTeacherCols)
+    setTeacherCols(newTeacherCols);
   };
+
+  const handleAddButtonClick = () => {
+    const newCol = {
+      id: teacherCols.length + 1,
+      label: `อาจารย์ท่านที่ ${teacherCols.length + 1}`,
+      selectedOption: '',
+    };
+    setTeacherCols([...teacherCols, newCol]);
+  };
+
+  const handleRemoveColClick = () => {
+    if (teacherCols.length > 1) {
+      const newTeacherCols = [...teacherCols];
+      newTeacherCols.pop(); // ลบจากเลขสุดท้าย
+      setTeacherCols(newTeacherCols);
+    }
+  };
+
   return (
     <>
       <div className="header bg-gradient-info pb-8 pt-5 pt-md-8">
@@ -229,7 +295,38 @@ const Search1 = () => {
               </Col>
             </Row>
             <br></br>
-            <Row >
+            <Row>
+
+              {teacherCols.map((teacherCol, index) => (
+                <Col key={teacherCol.id} xs="4">
+                  {user_type === 'teacher' && <Label>{teacherCol.label}</Label>}
+                  {user_type === 'teacher' && (
+                    <>
+                      <Row>
+                        <Col>
+                          <Input
+                            type="select"
+                            value={teacherCol.selectedOption}
+                            onChange={(e) => handleSelectChange(index, e.target.value)}
+                          >
+                            <option value=""></option>
+                            {teacher.map((option) => (
+                              <option key={option.id} value={option.id}>
+                                {option.user_firstname_th} {option.user_lastname_th}
+                              </option>
+                            ))}
+                          </Input>
+                        </Col>
+                      </Row>
+                    </>
+                  )}
+                </Col>
+              ))}
+
+            </Row>
+
+
+            {/* <Row >
               <Col  xs="4" >
               {user_type == 'teacher' && <Label> อาจารย์ท่านที่ 1 </Label>}
                 {user_type == 'teacher' &&  <Input type="select" value={selectedOption1} onChange={handleSelectChange1} >
@@ -257,8 +354,22 @@ const Search1 = () => {
                         ))}
                 </Input>}
               </Col>
-            </Row>
+            </Row> */}
+
           </CardHeader>
+          <Col xs="12">
+          {user_type === 'teacher' && <Button style={{ "margin-left": "9px", float: "right" }} onClick={handleAddButtonClick}
+              color="primary"
+            >
+              + เพิ่มอาจารย์
+            </Button>}
+            {user_type === 'teacher' && <Button style={{ "margin-left": "9px", float: "right" }} onClick={handleRemoveColClick}
+              color="danger"
+            >
+              - ลบอาจารย์
+            </Button>}
+          </Col>
+
           <CardBody>
             <Row>
 
@@ -435,21 +546,21 @@ const Search1 = () => {
                               >
 
                                 {user_type == 'admin' && <Input type="select" disabled value={university.result_tc} onChange={(event) => handleSelectCh(event, idx, subIndex, university.id_course)}>
-
+                                  <option value=""></option>
                                   <option value="tc">TC</option>
                                   <option value="ce">CE</option>
                                   <option value="cs">CS</option>
                                   <option value="nct">ไม่อนุมัติ</option>
                                 </Input>}
                                 {user_type == 'user' && <Input type="select" disabled value={university.result_tc} onChange={(event) => handleSelectCh(event, idx, subIndex, university.id_course)}>
-
+                                  <option value=""></option>
                                   <option value="tc">TC</option>
                                   <option value="ce">CE</option>
                                   <option value="cs">CS</option>
                                   <option value="nct">ไม่อนุมัติ</option>
                                 </Input>}
                                 {user_type == 'teacher' && <Input type="select" value={university.result_tc} onChange={(event) => handleSelectCh(event, idx, subIndex, university.id_course)}>
-
+                                  <option value=""></option>
                                   <option value="tc">TC</option>
                                   <option value="ce">CE</option>
                                   <option value="cs">CS</option>
@@ -506,12 +617,12 @@ async function delete_course(bodys) {
 async function get_userall_teacher() {
   // let token = localStorage.getItem("accessToken")
   return await fetch('https://api-ii.onrender.com/system/get_userall_teacher', {
-      method: 'GET',
-      headers: {
-          'Content-Type': 'application/json',
-      }
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    }
   })
-      .then(data => data.json())
+    .then(data => data.json())
 }
 //--- 
 async function add_teacher(bodys) {

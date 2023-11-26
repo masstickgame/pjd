@@ -49,14 +49,16 @@ const Compare = () => {
     setNames(sessionStorage.getItem('nameS'))
     let json = JSON.parse(Items)
     let sums = 0
-
+    if (json[0].groupuniversitys[0].indextea != null) {
+      setTeacher(json[0].groupuniversitys[0].indextea);
+    }
     json.forEach((i, j) => {
       json[j].result_tc = i.groupuniversitys[0].result_tc
-      if( json[j].result_tc !='nct'){
+      if (json[j].result_tc != 'nct') {
         sums += parseInt(i.unit_university)
       }
     });
-  
+
     const thaiMonths = [
       'มกราคม',
       'กุมภาพันธ์',
@@ -71,14 +73,14 @@ const Compare = () => {
       'พฤศจิกายน',
       'ธันวาคม'
     ];
-    
+
     const currentDate = new Date();
     const currentMonth = currentDate.getMonth();
     const currentDay = currentDate.getDate();
-    const currentYaer = currentDate.getFullYear() +543;
+    const currentYaer = currentDate.getFullYear() + 543;
     const thaiMonthName = thaiMonths[currentMonth];
-    
-    let dateString = currentDay +' '+ thaiMonthName +' '+currentYaer
+
+    let dateString = currentDay + ' ' + thaiMonthName + ' ' + currentYaer
     setDates(dateString)
     setSum(sums)
     let arr = []
@@ -122,6 +124,7 @@ const Compare = () => {
     setGroup(response[0].group)
     setUniversity_old(response[0].university_old)
     setSelectedOption(response[0].university_old)
+    
 
   };
   const backtomainuser = async () => {
@@ -153,19 +156,26 @@ const Compare = () => {
   };
   const getuserDataTeacher = async (arr) => {
     let users = await get_userall_teacher()
-    for (let i = 0; i < users.length; i++) {
-      if(parseInt(arr[0].teacher1) === users[i].id){
-        setTaecher1(users[i].user_firstname_th +' '+ users[i].user_lastname_th)
-      }
 
-      if(parseInt(arr[0].teacher2) === users[i].id){
-        setTaecher2(users[i].user_firstname_th +' '+ users[i].user_lastname_th)
+    if (arr.length != 0) {
+      let Items = sessionStorage.getItem('itemSchool2')
+      let json = JSON.parse(Items)
+      let indextea
+      if (json[0].groupuniversitys[0].indextea != null) {
+        indextea = json[0].groupuniversitys[0].indextea; 
+         for (let i = 0; i < users.length; i++) {
+        indextea.forEach(data => {
+          if (parseInt(data.selectedOption) === users[i].id) {
+            data.teacher = users[i].user_firstname_th + ' ' + users[i].user_lastname_th
+          }
+        });
       }
-
-      if(parseInt(arr[0].teacher3) === users[i].id){
-        setTaecher3(users[i].user_firstname_th +' '+ users[i].user_lastname_th)
+      setTeacher(indextea)
       }
+    
+      console.log(indextea)
     }
+
   };
   return (
     <>
@@ -303,7 +313,7 @@ const Compare = () => {
               <Row style={{ "padding": "20px" }}>
                 <Col lg="12" style={{ "text-align": "left" }}>
                   <h4>
-                    4.	จำนวนหน่วยกิตที่ต้องศึกษาอีกจำนวน .......... {135-sum} .......... หน่วยกิต
+                    4.	จำนวนหน่วยกิตที่ต้องศึกษาอีกจำนวน .......... {135 - sum} .......... หน่วยกิต
                   </h4>
                 </Col>
                 <Col lg="12" style={{ "text-align": "left" }}>
@@ -313,15 +323,11 @@ const Compare = () => {
                 </Col>
                 <br></br>
                 <Col lg="12" style={{ "text-align": "left" }}>
-                  <h4>
-                    5.1	ลงชื่อ......{teacher1}....... วันที่ ................... {dates} ....................
-                  </h4>
-                  <h4>
-                    5.2	ลงชื่อ......{teacher2}....... วันที่ ................... {dates} ...................
-                  </h4>
-                  <h4>
-                    5.3	ลงชื่อ......{teacher3}....... วันที่ ................... {dates} ...................
-                  </h4>
+                  {teacher.map((data, idx) => (
+                    <h4 key={data.id}>
+                      5.{idx + 1}	ลงชื่อ......{data.teacher}....... วันที่ ................... {dates} ....................
+                    </h4>
+                  ))}
 
                 </Col>
               </Row>

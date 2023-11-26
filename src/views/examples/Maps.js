@@ -17,13 +17,9 @@ const Maps = () => {
   const [searchTerm, setSearchTerm] = useState();
   const [selectedYear, setSelectedYear] = useState(""); // ค่าเริ่มต้นว่าง
   const currentYear = new Date().getFullYear(); // หาปีปัจจุบัน
-  const years = Array.from({ length: 20 }, (_, index) => currentYear - 5 + index);
+  const years = Array.from({ length: 15 }, (_, index) => currentYear - 10 + index);
 
   useEffect(() => {
-    let token = localStorage.getItem('accessToken') || null
-    if(token == null){
-      window.location.href = '/auth'
-    }
     get_school()
   }, []);
   const get_school = async () => {

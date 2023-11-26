@@ -155,17 +155,14 @@ const Information = () => {
   const [flagboo, setFlagboo] = useState(false);
   const [university_year, setUniversity_year] = useState('');
   useEffect(() => {
-    let token = localStorage.getItem('accessToken') || null
-    if(token == null){
-      window.location.href = '/auth'
-    }
-    getuserData()
+    //  getuserData()
     handleSelectChange()
   }, []);
   const handleClickInsideTables = async () => {
     const response = await SearchTermd({
       searchTerm: searchTerm,
     });
+    console.log(response)
     setSortedData(response)
   };
   let getuserData = async () => {
@@ -176,7 +173,6 @@ const Information = () => {
       let bo = {
         groups: i.group
       }
-      console.log(i.group)
       arr.push(i.group)
     });
     const duplicates = findDuplicates(arr);
@@ -304,6 +300,9 @@ const Information = () => {
                 type="select"
                 onChange={(event) => handleSelectChange(event)}
               >
+                <option value={''}>
+                  เลือกปี
+                </option>
                 <option value={'2563'}>
                   2563
                 </option>

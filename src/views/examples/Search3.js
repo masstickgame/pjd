@@ -35,10 +35,6 @@ const Search3 = () => {
   let indexset
   // function นี้ เปิดมาแล้วทำงานทันที (use effect)
   useEffect(() => {
-    let token = localStorage.getItem('accessToken') || null
-    if(token == null){
-      window.location.href = '/auth'
-    }
     let ns = localStorage.getItem("names")
     let id_sub = localStorage.getItem("id_school")
     setNames(ns)
@@ -101,7 +97,9 @@ const Search3 = () => {
     setItemsSchool2(Dataname2)
   };
   const handleSelectChange = (event) => {
+    console.log(event.target.value)
     setSelectedOption(event.target.value);
+
     itemsuniversity.forEach(i => {
       if (event.target.value === i.id_subject) {
         setSelectId_subject(i.id_subject)
